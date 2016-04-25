@@ -1,0 +1,20 @@
+admin_Dashboard:
+    path:     /Dashboard
+    defaults: { _controller: AdminBundle:Admin:Dashboard }
+
+
+admin_general:
+    resource: "route/general.yml"
+    prefix:   /
+
+admin_manga:
+    resource: "route/manga.yml"
+    prefix:   /manga
+
+admin_membre:
+    resource: "route/membre.yml"
+    prefix:   /membre
+
+admin_membre:
+    resource: "route/pdf.yml"
+    prefix:   /pdf

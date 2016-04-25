@@ -1,0 +1,12 @@
+#inbox - message recu et envoyer
+#directement traiter dans l'action profil
+
+#outbox - creer un message
+message_mailbox_outbox:
+    path:       /outbox
+    defaults:   { _controller: UserBundle:Profile:outbox}
+
+#voir - affiche le message
+message_mailbox_view:
+    path:       /view
+    defaults:   { _controller: UserBundle:Message:view}

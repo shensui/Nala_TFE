@@ -1,0 +1,73 @@
+{#layoute de base#}
+
+<!DOCTYPE html>
+<html>
+<head lang="fr">
+    <title>{% block title %}N.A.L.A{% endblock %}</title>
+
+    <link href="{{ asset('bundles/core/images/favico.gif') }}" rel="shortcut icon">
+    <link href="{{ asset('bundles/core/images/favico.gif') }}" rel="image_src">
+
+    {% block stylesheets %}
+        <!-- Latest compiled and minified CSS-->
+        <link href="{{ asset('bundles/core/css/bootstrap.css') }}" rel="stylesheet" type="text/css"/>
+        <!-- personal css -->
+        <link href="{{ asset('bundles/core/css/core.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('bundles/core/css/test.css') }}" rel="stylesheet" type="text/css"/>
+    {% endblock %}
+
+    <!-- Custom Fonts -->
+    <link href="{{ asset('bundles/core/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css"/>
+
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div class="container">
+        <nav class="mynav">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-xs-12">
+                        <div class="logo">
+                            <a href="{{ path('core_homepage') }}">
+                                <img src="{{ asset('bundles/core/images/logo.png') }}" alt="logo du site" class="img-circle logo-img" >
+                            </a>
+                        </div>
+                        <div class="user">
+                            <a href="{{ path('fos_user_security_login') }}" class="bttn btn-connect">Connection</a>
+
+                            <a href="{{ path('fos_user_registration_register') }}" class="bttn btn-register">Inscription</a>
+                        </div>
+                        <ul class="list-unstyled list-inline">
+                            {% block site_nav %}
+                            {% endblock %}
+                        </ul>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </nav>
+        <div class="row">
+            {% block contenue %}{% endblock %}
+
+        </div>
+        <div class="row footer-inner">
+            <i class="fa fa-copyright"> Copyright</i>
+            <br>
+            <p>Tout drois reservee. ShensuiProd 2010 - 2016</p>
+        </div>
+    </div>
+</body>
+{% block javascripts %}
+    <!-- jQuery Version 1.11.0 -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+{#
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+#}
+    <script src="{{ asset('bundles/core/js/bootstrap.min.js') }}"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <!--personal js-->
+    <script src="{{ asset('bundles/core/js/main.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/core/ckeditor/ckeditor.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+</html>

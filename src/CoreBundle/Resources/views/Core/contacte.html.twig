@@ -1,0 +1,126 @@
+{% extends '::CoreLayout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .form-contacte {
+            border: 1px solid black;
+            padding: 5px 10px;
+            background: whitesmoke;}
+        .form-contacte input {
+            text-align: center; }
+        .form-contacte textArea {
+            width: 100%; }
+
+        .require {
+            color: #ff0000; }
+    </style>
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} | Contacte
+{% endblock %}
+
+{% block site_nav %}
+    <li>
+        <a href="{{ path('core_homepage') }}" class="">Home(v)</a>
+    </li>
+    <li><a href="#">Portfolio(?)</a></li>
+    <li><a href="{{ path('core_about') }}">A Propos(x)</a></li>
+    <li><a href="{{ path('fos_user_profile_show') }}">Membres (v)</a></li>
+    <li><a href="{{ path('core_Contacte') }} " class="actif">Contact(x)</a></li>
+{% endblock %}
+
+{% block contenue %}
+    <div class="col-lg-12 contacte" style="padding: 5px 30px; background: rgba(255,255,255,0.5);">
+        <h2>Nous contacter.</h2>
+
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>{{ flashMessage }}</strong>
+            </div>
+        {% endfor %}
+
+        <p>
+            Pour nous contacter, c'est très simple grace a cette page,
+            <br>
+            Vous pouver nous envoyer un message, grace aux formulaire de contacte ci-join.
+            <br>
+            ou via notre mail, ou par courier.
+        </p>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-lg-6 col-sm-12 col-xs-12">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-xs-12">
+                        <address>
+                            <p>Vous pouvez nous contacter a cette adresse :</p>
+                            <p>
+                                <strong>Shensui Prod</strong><br>
+                                {{ adress.adr_rue }} {{ adress.adr_Num }}<br>
+                                {{ adress.adr_cp }} {{ adress.adr_ville }} (Belgique)
+                                <br><br>
+                                <strong>GSM: </strong><em>{{ adress.gsm_num }}</em>
+                                <br><br>
+                                <strong>E-Mail: <br>
+                                </strong><em><a href="mailto:{{ adress.adr_email_1 }}?subject=Contacte.">{{ adress.adr_email_1 }}</a></em><br>
+                                </strong><em><a href="mailto:{{ adress.adr_email_2 }}?subject=Contacte.">{{ adress.adr_email_2 }}</a></em><br>
+                            </p>
+                        </address>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12 col-xs-12">
+                {{ form_start(form, {'attr': {'class': 'form-contacte'}}) }}
+                <div class="form-group">
+                    <span class="require">*</span>
+                    {# Generation du label. #}
+                    {{ form_label(form.auteur, "Votre Nom :") }}
+
+                    {# Affichage des erreurs pour ce champ prÃ©cis. #}
+                    {{ form_errors(form.auteur) }}
+
+                    {# GÃ©nÃ©ration de l'input. #}
+                    {{ form_widget(form.auteur) }}
+                </div>
+                <div class="form-group">
+                    <span class="require">*</span>
+                    {# GÃ©nÃ©ration du label. #}
+                    {{ form_label(form.mail, "Votre Adresse mail :") }}
+
+                    {# Affichage des erreurs pour ce champ prÃ©cis. #}
+                    {{ form_errors(form.mail) }}
+
+                    {# GÃ©nÃ©ration de l'input. #}
+                    {{ form_widget(form.mail) }}
+                </div>
+                <div class="form-group">
+                    <span class="require">*</span>
+                    {# GÃ©nÃ©ration du label. #}
+                    {{ form_label(form.message, "Votre Message :") }}
+
+                    {# Affichage des erreurs pour ce champ prÃ©cis. #}
+                    {{ form_errors(form.message) }}
+
+                    {# GÃ©nÃ©ration de l'input. #}
+                    {{ form_widget(form.message) }}
+                </div>
+                <p class="help-block pull-right">
+                    <span class="require">*</span> champs obligatoire.
+                </p>
+                <div class="form-group">
+                    {{ form_widget(form.envoyer) }}
+                </div>
+                <div class="form-group">
+                    {{ form_rest(form) }}
+                </div>
+                {{ form_end(form) }}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

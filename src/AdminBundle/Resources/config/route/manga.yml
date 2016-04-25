@@ -1,0 +1,15 @@
+admin_liste:
+    path:     /liste
+    defaults: { _controller: AdminBundle:Admin:Liste }
+
+admin_update:
+    path:     /{id}_{slug}/update
+    defaults: { _controller: AdminBundle:Admin:Update }
+
+admin_delete:
+    path:     /{id}-delete
+    defaults: { _controller: AdminBundle:Admin:Delete }
+
+admin_online:
+    path:     /online/{id}
+    defaults: { _controller: AdminBundle:Admin:Online }

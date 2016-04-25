@@ -1,0 +1,12 @@
+#route membre
+admin_membre:
+    path:     /{page}
+    defaults: { _controller: AdminBundle:Admin:Membre, page: 1 }
+
+so_admin_update_membre:
+    path:     /$update/{id}_{username}
+    defaults: { _controller: SOAdminBundle:Admin:UpdateMembre }
+
+so_admin_promote:
+    path:     /update/{id}_{username}/{role}
+    defaults: { _controller: SOAdminBundle:Admin:Promote }

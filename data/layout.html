@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="well" style="text-align: justify; display: none">
+    {#dump(form.genres.vars.value)#}
+    {% for choice in form.genres.children %}
+
+    <label for="{{choice.vars.id}}" class="btn btn-primary genre_label" style="margin: 0 5px 5px 0;">
+        <input id="{{choice.vars.id}}"
+               class="checkbox-genres"
+               style="margin-right:5px;margin-bottom:0;vertical-align: middle; margin-top: 0;"
+               type="checkbox" name="{{choice.vars.full_name}}"
+               value="{{choice.vars.value}}" {% if form.genres.vars.value[choice.vars.value] == true %} checked="checked"{% endif %} />{{choice.vars.label}}
+    </label>
+    {%endfor%}
+</div>
+</body>
+</html>
+
+nom: stan lee cole
+chanson: that's why we weep

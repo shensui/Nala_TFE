@@ -1,0 +1,15 @@
+{% extends "UserBundle::UserLayout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    <p>
+        {{ 'registration.confirmed'|trans({'%username%': user.username}) }}
+        <br>
+        l'equipe de site, vous souhaite une bonne chance sur le site.
+        <br>
+        <a href="#">retour aux site</a>
+         /
+        <a href="#">voir mon profil.</a>
+    </p>
+{% endblock fos_user_content %}

@@ -1,0 +1,58 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 12-oct.-2014, 15:12:19
+    Author     : Frédéric
+*/
+
+.divider-inverse {
+  height: 1px;
+  margin: 9px 0;
+  background-color: red;}
+
+table{text-align: center;}
+
+.panel-footer{text-align: center; margin: auto;}
+
+.form-scan-add input,
+.form-scan-add label,
+.form-scan-add textArea,
+.form-scan-add select {
+    text-align: center;
+    margin-bottom: 10px;
+}
+.form-scan-add textArea{margin-bottom: 0;}
+.form-scan-add label{text-decoration: underline; font-size: 18px; margin: 0 auto;}
+
+textarea{width: 100%;}
+.form-scan-add input:focus{
+    background: #ffffcc;
+}
+
+.cover{
+    background: lightsteelblue;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.cover_img{
+    width: 350px;
+}
+
+.table-scan strong,
+.table-scan em {
+    text-transform: capitalize;
+}
+
+.table-scan td{
+    width: 50%;
+    text-align: left;
+}
+
+.control-btn{
+    text-align: center;
+}
+

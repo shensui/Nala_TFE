@@ -1,0 +1,24 @@
+/* 
+    Created on : 19-janv.-2015, 8:48:40
+    Author     : Frédéric
+*/
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus{
+    color: #ffe26f;
+    background-color: #b73838;
+}
+
+.fos_user_user_show{
+    border: 1px dashed black;
+}
+
+h2,h3{text-decoration: underline; text-align: center;}
+
+table{width: 75% !important; margin: 0 auto;}
+
+table td{
+    text-align: left !important;
+    border: 1px solid black;
+}
+

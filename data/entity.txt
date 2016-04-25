@@ -1,0 +1,39 @@
+  /**************\
+ /*les entitées***\
+/******************\
+note:
+- l'id est auto-generé par symfony
+- @ = entité lier (relation)
+
+
+(V)user:
+--------
+- les donnée native de fosuser (username, pasword, mail, etc), qui sont générer,
+automaiquement
+- nom     : varchar(255) :             : obligatoire
+- prénom  : varchar(255) :             : obligatoire
+- sex     : bool         : homme/femme : obligatoire
+- tel     : int(12)      :             :
+- gsm     : int(12)      :             :
+- adresse :              :             : obligatoire
+-- rue    : varchar(255) :             :
+-- n*     : int(5)       :             :
+-- CP     : int(5)       :             :
+-- ville  : varchar(255) :             :
+
+(V)disponibilite: (nom provisoir)
+--------------------------
+- membre     : @user        : membre du site         : obligatoire
+- date_debut : date         : debut de disponibilite : obligatoire
+- date_fin   : date         : fin de disponibilite   : obligatoir
+- animal     : varchar(255) : chien/chat/etx         : obligatoire
+- createdAt  : dateTime     : date de creation       : obligatoire/aitp
+
+(V)animal:
+-------
+- nom         : varchar(255) : nom de l'animal  : obligatoire
+- type        : varchar(255) : chien, chat, etx : obligatoire
+- sexe        : boolean      : male, femelle    : obligatoire
+- age         : integer(2)   :                  : obligatoire
+- propietaire : @user        :                  : obligatoire
+- santé       : text         : état de sonaté   : obligatoire

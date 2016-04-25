@@ -1,0 +1,70 @@
+html{
+    font: 1.1em sans-serif;
+}
+
+.container{
+    border: 1px solid #000000;
+    padding-top: 5px;
+}
+
+/*core*/
+.slogon{
+    width: 50%;
+    margin: 20px auto;
+    color: white;
+    font-family:  Helvetica sans-serif;
+}
+
+.contenu {
+    background: url("../Images/simby.jpg") no-repeat center;
+}
+
+.form-index,
+.footer-inner{
+    background: rgba(255,255,255,0.5);
+    padding: 3px 10px;
+    border-radius: 5px;
+}
+
+.footer-inner{
+    text-align: center;
+    width: 25%;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+.form-index .form-group{
+    padding: 5px;
+}
+
+.mynav, body, html{
+    background: #C8AD7F !important;
+}
+
+.result-title {
+    font-size: 18px;
+}
+.result-left {
+
+}
+.result-right,
+.footer-result{
+    float: right;
+}
+
+.footer-result {
+}
+.footer-result a{
+    color: #0f0f0f;
+}
+
+.thump-img{
+    width: 100%;
+}
+.thump-img img {
+    //width: 31%;
+}
+
+.first-img {
+    width: 100%;
+    margin-bottom: 3px;
+}

@@ -1,0 +1,85 @@
+{% extends '::CoreLayout.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | Annonces
+{% endblock %}
+
+{% block site_nav %}
+    <li>
+        <a href="{{ path('core_homepage') }}" class="">Home(v)</a>
+    </li>
+    <li><a href="#">Portfolio(?)</a></li>
+    <li><a href="{{ path('core_about') }}">A Propos(x)</a></li>
+    <li><a href="{{ path('fos_user_profile_show') }}">Membres (v)</a></li>
+    <li><a href="{{ path('core_Contacte') }}">Contact(x)</a></li>
+{% endblock %}
+
+{% block contenue %}
+    <div class="col-lg-9 col-lg-offset-1" style="padding: 5px; //background: rebeccapurple;">
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12 ">
+                <div class="well">
+                    <p>
+                        <a href="#" class="btn btn-link">nala</a> > <a href="#" class="btn btn-link">Annonce</a>
+                    </p> <!--barre de nav interieur (home/result-->
+
+                    <p>
+                        {{ nbrRes }} Annonces corespondante a votre recherche,
+                    </p>
+                    <!--nbr de résulte, possibilité d'une pagination-->
+                </div>
+                <div class="well">
+                    {% for d in dispo %}
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            <span class="result-title result-left">Resultat 001</span>
+                                    <span class="result-title result-right">
+                                        <i class="fa fa-map-marker"></i> {{ d.membre.adrVille }}</span>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-3 col-sm-3 col-xs-3">
+                                    <div class="first-img">
+                                        <img src="../Medias/images/chat1.jpg" alt="" class="img-responsive">
+                                    </div>
+                                </div>
+                                <div class="col-lg-9 col-sm-9 col-xs-9">
+                                    <p class="text-justify">
+                                        Je me nomme <strong>{{ d.membre.nom }} {{ d.membre.prenom }}</strong>.
+                                        <br>
+                                        Je garde votre/vos {{ d.animal }}(s) du {{ d.dispoDebut|date('d-M-Y') }} aux {{ d.dispoFin|date('d-M-Y') }}.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                                    <span class="footer-result">
+                                    {% if is_granted('ROLE_MEMBRE') %}
+                                        <a class="btn" href="#">
+                                            <i class="fa fa-phone"></i>
+                                            {% if d.membre.numTel %}
+                                                {{ d.membre.numTel }}
+                                            {% else %}
+                                                {{ d.membre.numGsm }}
+                                            {% endif %}
+                                        </a>
+                                        <a class="btn btn-primary" href="mailto:{{ d.membre.email }}">
+                                            E-mail <i class="fa fa-envelope-o"></i>
+                                        </a>
+                                        <a class="btn btn-success" href="{{ path('Core_Profil', {'id': d.membre.id, 'username': d.membre.username}) }}">
+                                            Voir <i class="fa fa-eye"></i>
+                                        </a>
+                                        {% else %}
+                                        pour voir le profile, connectez-vous.
+                                     {% endif %}
+                                    </span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {{ dump(dispo) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

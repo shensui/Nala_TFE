@@ -1,0 +1,103 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<h2>Modifier vos donnee de profil.</h2>
+{{ dump() }}
+{{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit', 'style': 'width: 75%; margin: auto;'} }) }}
+    {#{{ form_widget(form) }}#}
+    <fieldset>
+        <legend>* Données d'enregistrement</legend>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    {{ form_errors(form.username) }}
+                    {{ form_label(form.username) }}
+                    {{ form_widget(form.username,{ attr:{'class': 'form-control' }}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_errors(form.email) }}
+                    {{ form_label(form.email) }}
+                    {{ form_widget(form.email,{ attr:{'class': 'form-control', 'placeholder': 'mail@domaine.xxx' }}) }}
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group">
+                    {{ form_errors(form.current_password) }}
+                    {{ form_label(form.current_password) }}
+                    {{ form_widget(form.current_password,{ attr:{'class': 'form-control' }}) }}
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Coordonnées personele</legend>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    {{ form_errors(form.nom) }}
+                    {{ form_label(form.nom, '* Votre nom') }}
+                    {{ form_widget(form.nom) }}
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    {{ form_errors(form.prenom) }}
+                    {{ form_label(form.prenom, '* Votre prénom') }}
+                    {{ form_widget(form.prenom) }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    {{ form_errors(form.numTel) }}
+                    {{ form_label(form.numTel, 'Votre N° de Telephonne') }}
+                    {{ form_widget(form.numTel) }}
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    {{ form_errors(form.numGsm) }}
+                    {{ form_label(form.numGsm, 'Votre N° de GSM') }}
+                    {{ form_widget(form.numGsm) }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <fieldset>
+                    <legend>Adresse</legend>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                {{ form_errors(form.adrRue) }}
+                                {{ form_label(form.adrRue, 'Votre Rue + N°') }}
+                                {{ form_widget(form.adrRue) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                {{ form_errors(form.adrCp) }}
+                                {{ form_label(form.adrCp, '* Votre Code Postal°') }}
+                                {{ form_widget(form.adrCp) }}
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="form-group">
+                                {{ form_errors(form.adrVille) }}
+                                {{ form_label(form.adrVille, '* Votre Ville') }}
+                                {{ form_widget(form.adrVille) }}
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </fieldset>
+    <div class="form-group">
+        {{ form_rest(form) }}
+    </div>
+    <div class="form-group">
+        <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+    </div>
+{{ form_end(form) }}

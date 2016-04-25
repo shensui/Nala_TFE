@@ -1,0 +1,160 @@
+{% extends "::AdminLayout.html.twig" %}
+
+{% block admin_nav %}
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav side-nav">
+            <li class="">
+                <a href="{{ path('admin_Dashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+            </li>
+            <li class="active">
+                <a href="javascript:;" data-toggle="collapse" data-target="#fiche"><i class="fa fa-fw fa-book"></i> Manga <i class="fa fa-fw fa-caret-down"></i></a>
+                <ul id="fiche" class="collapse">
+                    <li>
+                        <a href="{{ path('admin_liste') }}">Liste</a>
+                    </li>
+                    <li><a href="{{ path('admin_type') }}">Type</a></li>
+                    <li><a href="{{ path('admin_genre') }}">Genre</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-fw fa-comments"></i> Commentaire</a>
+            </li>
+            <li>
+                <a href="{{ path('admin_membre') }}"><i class="fa fa-fw fa-user"></i> Membre</a>
+            </li>
+            {% if is_granted('ROLE_ADMIN') %}
+                <li class="">
+                    <a href="{{ path('admin_contact') }}"><i class="">Contacte</i></a>
+                </li>
+            {% endif %}
+            <li class="divider-inverse"></li>
+            <li class="">
+                <a href="{{ path('manga_homepage') }}"><i class=""></i> Retours au Site</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block admin_body %}
+    {% for key, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <div class="alert alert-{{ key }} alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>{{ message }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Liste des Mangas:
+            </h1>
+            <ol class="breadcrumb">
+                <li class="">
+                    <i class="fa fa-dashboard"></i>  <a href="{{ path('admin_Dashboard') }}">Dashboard</a>
+                </li>
+                <li class="">
+                    <i class=""></i>  <a href="#" class="disabled">Manga</a>
+                </li>
+                <li class="active">
+                    <i class=""></i>  <a href="#">Liste</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <div class="col-xs-12">
+        <div class="box box-info">
+            {#<div class="box-header">
+                <h3 class="box-title">Liste des Mangas</h3>
+            </div>#}<!-- /.box-header -->
+            <div class="box-body table-responsive">
+                <table id="ListeManga" class="table table-bordered table-striped" style="text-align: center;">
+                    <thead>
+                        <tr style="text-align: center; vertical-align: middle;">
+                            <th>#</th>
+                            <th>Titre</th>
+                            <th>Année</th>
+                            <th>Types</th>
+                            <th>Statuts</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for manga in manga %}
+                        <tr style="vertical-align: middle;">
+                            <td>{{ manga.id }}.</td>
+                            <td>{{ manga.title }}</td>
+                            <td>{{ manga.years }}</td>
+                            <td>{{ manga.type.name }}</td>
+                            <td style="text-align: center; vertical-align: middle;">
+                                {% if manga.online == 1 %}
+                                    <span class="label-success"> Online </span>
+                                {% elseif manga.online == 0 %}
+                                    <span class="label-danger"> Offline </span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if manga.online == 0 %}
+                                    <a class="btn" href="{{ path('admin_online', {'id': manga.id}) }}" title="Approuver">
+                                        <i class="fa fa-check-square-o"></i> Approuver
+                                    </a>
+                                {% endif %}
+                                <a class="btn" href="" title="Voire">
+                                    <i class="fa fa-eye"></i> Voire
+                                </a>
+                                <a class="btn" href="" title="Editer">
+                                    <i class="fa fa-pencil-square-o"></i> Editer
+                                </a>
+                                <a class="btn" href="" title="Supprimer">
+                                    <i class="fa fa-trash-o"></i> Supprimer
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>#</th>
+                            <th>Titre</th>
+                            <th>Année</th>
+                            <th>Types</th>
+                            <th>Statuts</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+    </div>
+    <!-- /.row -->
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <!-- DATA TABES SCRIPT -->
+    <script type="text/javascript" src="{{ asset('bundles/admin/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/admin/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
+    <!-- SlimScroll -->
+    <script type="text/javascript" src="{{ asset('bundles/admin/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
+    <!-- FastClick -->
+    <script type="text/javascript" src="{{ asset('bundles/admin/plugins/fastclick/fastclick.min.js') }}"></script>
+    <!-- page script -->
+    <script type="text/javascript">
+        $(function () {
+            $('#ListeManga').dataTable({
+                "bPaginate": true,
+                "bLengthChange": true, /*false*/
+                "bFilter": true, /*false*/
+                "bSort": true,
+                "bInfo": true,
+                "bAutoWidth": true /*false*/
+            });
+        });
+    </script>
+    {#<script type="text/javascript" src="{{ asset('bundles/shensuiadmin/main/main.js') }}"></script>#}
+{% endblock %}

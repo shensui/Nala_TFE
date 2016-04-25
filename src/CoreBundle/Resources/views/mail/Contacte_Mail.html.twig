@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="fr">
+    <meta charset="UTF-8">
+</head>
+<body>
+    <header>
+        <p>
+            <strong>author: </strong> {{ auteur }}
+            <br/>
+            <strong>from: </strong> {{ from }}
+            <br/>
+            <strong>To :</strong> {{ to }}
+            <br/>
+            <strong>recu le :</strong> {{ created|date('d/m/y H:i:s') }}
+        </p>
+    </header>
+
+    <section>
+        <p>
+            <strong>Sujet: </strong><em>{{ sujet }}</em><br/>
+            Chère Administrateur, un visiteur vous a laisser un message sur le site.
+            <br/>
+            Ci-joint, une copie: <br/>
+            <blockquote>
+                {{ message }}
+            </blockquote>
+            Vous pouvez aussi le consulter dans l'espace d'administration <a href="#">ICI (non affectee)</a>.
+        </p>
+    </section>
+
+    <footer>
+        <hr/>
+        <em>Ce mail à été envoyer via un formulaire symfony en mode local.</em>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,18 @@
+#route genre
+admin_genre:
+    path:     /genre
+    defaults: { _controller: AdminBundle:Admin:Genre }
+
+#route type
+admin_type:
+    path:     /type
+    defaults: { _controller: AdminBundle:Admin:Type }
+
+#route contacte
+admin_contact:
+    path:     /contact
+    defaults: { _controller: AdminBundle:Admin:Contact }
+
+admin_contact_delete:
+    path:     /contact/delet_{id}
+    defaults: { _controller: AdminBundle:Admin:ContactDelete }

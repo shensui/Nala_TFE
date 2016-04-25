@@ -1,0 +1,40 @@
+#route d'index du site,
+#il contiendra un formulaire de recherche
+core_homepage:
+    path:     /
+    defaults: { _controller: CoreBundle:Core:index }
+
+
+#route de la page a propos
+core_about:
+    path:     /
+    defaults: { _controller: CoreBundle:Core:about }
+
+
+#route de contacte de site,
+#tout les message serront envoyer a l'administrateur.
+core_Contacte:
+    path:     /contacte
+    defaults: { _controller: CoreBundle:Core:contacte }
+
+#route de la recuperation en ajax des ville
+#via le code postale
+core_ville:
+    path:     /ville/{{cp}}
+    defaults: { _controller: CoreBundle:Core:AjaxVille }
+
+#route des la page de resultat executer
+#par le formulaire de la page index.
+core_annonce:
+    path:     /annonce
+    defaults: { _controller: CoreBundle:Core:Annonce }
+
+#route du profil public d'un membre
+Core_Profil:
+   path: /profile/{id}_{username}
+   defaults: { _controller: CoreBundle:Core:ProfilePub }
+
+#route teste
+Core_test:
+   path: /test
+   defaults: { _controller: CoreBundle:Core:test }

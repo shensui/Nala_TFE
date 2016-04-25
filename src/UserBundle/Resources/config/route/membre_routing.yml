@@ -1,0 +1,8 @@
+membre_promot:
+    path:     /promote/{user}/{role}
+    defaults: { _controller: UserBundle:Membre:promoteUser}
+
+membre_dispo:
+    path:     /profil/dispo/add
+    defaults: { _controller: UserBundle:Profile:dispo_add}
+

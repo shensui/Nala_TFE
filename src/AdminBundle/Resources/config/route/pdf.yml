@@ -1,0 +1,4 @@
+route des pdf
+admin_ListePDF:
+    path:     /Statistique
+    defaults: { _controller: AdminBundle:AdminPdf:ListePDF }

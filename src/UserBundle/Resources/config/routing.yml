@@ -1,0 +1,13 @@
+#user_homepage:
+#    path:     /
+#    defaults: { _controller: UserBundle:Default:index }
+
+user_routing:
+    resource: "route/user_routing.yml"
+
+membre_routing:
+    resource: "route/membre_routing.yml"
+
+#message_routing:
+#    resource: "route/message_routing.yml"
+#    prefix:   /mailbox

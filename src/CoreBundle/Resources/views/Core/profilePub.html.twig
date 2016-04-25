@@ -1,0 +1,198 @@
+{% extends '::CoreLayout.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | Profil
+{% endblock %}
+
+{% block site_nav %}
+    <li>
+        <a href="{{ path('core_homepage') }}" class="">Home(v)</a>
+    </li>
+    <li><a href="#">Portfolio(?)</a></li>
+    <li><a href="{{ path('core_about') }}">A Propos(x)</a></li>
+    <li><a href="{{ path('fos_user_profile_show') }}">Membres (v)</a></li>
+    <li><a href="{{ path('core_Contacte') }}">Contact(x)</a></li>
+{% endblock %}
+
+{% block contenue %}
+    <pre>
+        {{ dump() }}
+    </pre>
+    <div class="col-lg-10 col-lg-offset-1" style="padding: 5px; //background: rebeccapurple;">
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12 ">
+                <div class="well">
+                    <ul class="nav nav-pills nav-justified">
+                        <li class="active">
+                            <a href="#profil" data-toggle="tab">Profil</a></li>
+                        <li>
+                        <li class="">
+                            <a href="#dispo" data-toggle="tab">Mes Disponibilitee</a></li>
+                        <li>
+                            <a href="#animals" data-toggle="tab">Animeaux</a>
+                        </li>
+                        <li>
+                            <a href="#contacte" data-toggle="tab">Contacte</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" style="padding-top: 10px;">
+                        <div class="tab-pane table-responsive" id="profil">
+                            <table class="table table-profil">
+                                <tr>
+                                    <td rowspan="8" style="text-align: center;">
+                                        <img src="https://pixabay.com/static/uploads/photo/2012/04/13/21/07/user-33638_960_720.png"
+                                             alt="" style="height: 100px; width: 100px;">
+                                    </td>
+                                    <td>Nom:</td>
+                                    <td>{{ user.nom|upper }} {{ user.prenom }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Sexe: </td>
+                                    <td>
+                                        <i class="fa fa-mars" style="color: dodgerblue;"></i>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Adresse:</td>
+                                    <td>
+                                        {{ user.adrRue }},
+                                        <br>
+                                        {{ user.adrCp }} {{ user.adrVille }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Adresse Mail:
+                                    </td>
+                                    <td>
+                                        {{ user.email }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Statuts: </td>
+                                    <td>{{ user.roles.0 }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Telephone:</td>
+                                    <td>{{ user.numTel }}</td>
+                                </tr>
+                                <tr>
+                                    <td>GSM</td>
+                                    <td>{{ user.numGsm }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Inscrit le: </td>
+                                    <td>{{ user.registerat|date('d/m/Y') }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="tab-pane  table-responsive" id="dispo">
+                            <table class="table-dispo table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <td>#</td>
+                                        <td>animal (race)</td>
+                                        <td>du</td>
+                                        <td>aux</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for d in dispo %}
+                                        <tr>
+                                            <td>{{ loop.index }}</td>
+                                            <td>{{ d.animal }}</td>
+                                            <td>{{ d.dispoDebut|date('d/m/Y') }}</td>
+                                            <td>{{ d.dispoFin|date('d/m/Y') }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="animals">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p style="text-align: justify; font-size: 22px;">
+                                        Je vais vous présenter mes animeaux de compagnie,
+                                        j'en possède {NbrAnimal}, si un jours vous les gardez,
+                                        vous en tomberé amoureux, j'en suis sure...
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                {% for a in animal %}
+                                <div class="col-md-6">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <img src="http://43.img.v4.skyrock.net/1283/30761283/pics/1255516140.jpg"
+                                                 alt="" style="height: 100px; width: 100px; margin: 0 15px 15px 0; background: lightgrey; float: left;">
+                                            <div class="animal_content">
+                                                <ul class="list-unstyled">
+                                                    <li>
+                                                        <strong>Nom</strong> : <em>{{ a.name }}</em>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Ager</strong> : <em>{{ a.age }} ans</em>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Sexe</strong> :
+                                                        <em>
+                                                            {% if a.sexe == 0 %}
+                                                            <i class="fa fa-venus"></i>
+                                                            {% else %}
+                                                            <i class="fa fa-mars"></i>
+                                                            {% endif %}
+                                                        </em>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Race</strong> : <em>{{ a.type }}</em>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Santée</strong> :
+                                                        <br>
+                                                        <em>{{ a.santee }}</em>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="tab-pane active" id="contacte">
+                            <div class="row">
+                                {{ form_start(form,{'attr': {'class': 'form-horizontal col-lg-8 col-lg-offset-2','style': 'border: 1px solid rgba(0,0,0,0.5); padding: 10px;'}}) }}
+                                <div class="form-group row">
+                                    {{ form_label(form.auteur, 'Votre Pseudo :', {'label_attr': {'class': 'col-sm-3 control-label' }}) }}
+                                    <div class="col-sm-9">
+                                        {{ form_errors(form.auteur) }}
+                                        {{ form_widget(form.auteur) }}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    {{ form_label(form.message, 'Votre Message :', {'label_attr': {'class': 'col-sm-3 control-label' }}) }}
+                                    <div class="col-sm-9">
+                                        {{ form_errors(form.message) }}
+                                        {{ form_widget(form.message) }}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+
+                                    </div>
+                                    <div class="col-sm-9">
+                                        {{ form_rest(form) }}
+                                        {{ form_widget(form.envoyer) }}
+                                    </div>
+                                </div>
+                                {{ form_end(form) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

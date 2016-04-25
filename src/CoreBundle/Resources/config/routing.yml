@@ -1,0 +1,4 @@
+general_routing:
+    resource: "route/general_routing.yml"
+    #prefix:   /mailbox
+
