@@ -108,60 +108,13 @@
                             <tr>
                                 <td colspan="4">
                                     <!-- Bouton execution modal -->
-                                    <button class="btn btn-primary btn-lg" data-backdrop="false" data-toggle="modal" data-target="#myModal">
+                                    <a href="{{ path('membre_dispo') }}" class="btn btn-primary btn-lg">
                                         Ajouter une disponibilitée.
-                                    </button>
+                                    </a>
                                 </td>
                             </tr>
                         </tfooter>
                     </table>
-                    {#modale ici#}
-                    <!-- Modal -->
-                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h4 class="modal-title" id="myModalLabel">Formulaire d'ajout d'une disponibilitée.</h4>
-                                </div>
-                                {{ form_start(formD) }}
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="form-goup col-sm-12">
-                                            {{ form_errors(formD.animal) }}
-                                            {{ form_label(formD.animal, 'Le type d\'animal') }}
-                                            {{ form_widget(formD.animal) }}
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="row">
-                                        <div class="form-group col-sm-6">
-                                            {{ form_errors(formD.dispoDebut) }}
-                                            {{ form_label(formD.dispoDebut, 'Disponible du :') }}
-                                            {{ form_widget(formD.dispoDebut) }}
-                                        </div>
-                                        <div class="form-group col-sm-6">
-                                            {{ form_errors(formD.dispoFin) }}
-                                            {{ form_label(formD.dispoFin, 'Aux :') }}
-                                            {{ form_widget(formD.dispoFin) }}
-                                        </div>
-                                        <div class="form-group col-sm-12">
-                                            <input type="hidden" name="_csrf_token"
-                                                   value="{{ csrf_token('authenticate') }}"
-                                            >
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    {{ form_widget(formD.ajouter) }}
-                                    {{ form_rest(formD) }}
-                                </div>
-                                {{ form_end(formD) }}
-                            </div><!-- /.modal-content -->
-                        </div><!-- /.modal-dialog -->
-                    </div><!-- /.modal -->
-
                 </div>
                 <div class="tab-pane" id="animals">
                     <div class="row">

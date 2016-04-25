@@ -28,14 +28,14 @@ class Dispo
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dispoDebut", type="date")
+     * @ORM\Column(name="dispoDebut", type="string", length=255)
      */
     private $dispoDebut;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="dispoFin", type="date")
+     * @ORM\Column(name="dispoFin", type="string", length=255)
      */
     private $dispoFin;
 
