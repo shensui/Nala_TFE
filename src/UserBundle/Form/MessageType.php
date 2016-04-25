@@ -16,7 +16,7 @@ class MessageType extends AbstractType
     {
         $builder
             ->add('message','textarea', array('attr' => array('class' => 'form-control', 'cols' => '30', 'rows'  => '10')))
-            ->add('auteur','text', array('attr' => array('class' => 'form-control', 'placeholder' => 'Username')))
+            //->add('auteur','text', array('attr' => array('class' => 'form-control', 'placeholder' => 'Username')))
             ->add('envoyer', 'submit', array('attr' => array('class' => 'btn btn-validate')))
         ;
     }

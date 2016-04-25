@@ -199,13 +199,13 @@ class CoreController extends Controller{
         $mail = null;
         dump($message);
         dump($user);
-        dump($this->getUser());
+        dump($visitor);
         if ($request->getMethod() == 'POST') {
             $form->submit($request);
             if ($form->isValid()) {
                 $em->persist($message);
                 $em->flush();
-                $this->redirect($this->generateUrl('fos_user_profile_show '));
+                $this->redirect($this->generateUrl('Core_Profil', array('id'=> $user->getId(), 'username' => $user->getUsername())));
             }
         }
 
