@@ -44,6 +44,6 @@ monolog:
 #swiftmailer:
 #    delivery_address: me@example.com
 
-swiftmailer:
+#swiftmailer:
     #delivery_address: 'kuromaru@live.fr'
-    disable_delivery:  true
+    #disable_delivery:  true

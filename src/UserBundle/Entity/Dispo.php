@@ -28,14 +28,14 @@ class Dispo
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dispoDebut", type="string", length=255)
+     * @ORM\Column(name="dispoDebut", type="datetime")
      */
     private $dispoDebut;
 
     /**
-     * @var string
+     * @var \DateTime
      *
-     * @ORM\Column(name="dispoFin", type="string", length=255)
+     * @ORM\Column(name="dispoFin", type="datetime")
      */
     private $dispoFin;
 
@@ -231,11 +231,11 @@ class Dispo
     /**
      * Set membre
      *
-     * @param User $membre
+     * @param \UserBundle\Entity\User $membre
      *
      * @return Dispo
      */
-    public function setMembre(User $membre)
+    public function setMembre(\UserBundle\Entity\User $membre)
     {
         $this->membre = $membre;
 
@@ -245,7 +245,7 @@ class Dispo
     /**
      * Get membre
      *
-     * @return User
+     * @return \UserBundle\Entity\User
      */
     public function getMembre()
     {

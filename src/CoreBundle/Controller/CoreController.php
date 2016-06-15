@@ -120,21 +120,23 @@ class CoreController extends Controller{
                 $request->getSession()->getFlashBag()->add('notice', 'Votre message a bien ete envoyer');
                 //$request->getSession()->getFlashBag()->clear();
 
-                /*$mail = \Swift_Message::newInstance();
-                $mail->setSubject('Contacte_'.$contacte->getDate()->format('d_m_y'));
-                $mail->setFrom($contacte->getMail());
-                $mail->setTo('darknaruke@gmail.com'); //remplacer par le compte mail du serveur
+                $From = array($contacte->getMail() => $contacte->getAuteur());
+
+                $mail = \Swift_Message::newInstance();
+                $mail->setSubject('Formulaire de Contacte_'.$contacte->getDate()->format('d_m_y'));
+                $mail->setFrom($From);
+                $mail->setTo('admin@shensuiprod.esy.es'); //remplacer par le compte mail du serveur
                 $mail->setCharset('utf-8');
                 $mail->setContentType('text/html');
                 $mail->setBody($this->renderView('CoreBundle:mail:Contacte_Mail.html.twig', array(
                     'auteur'  => $contacte->getAuteur(),
-                    'to'      => 'adress mail de l\'administrateur',
+                    'to'      => 'admin@shensuiprod.esy.es' ,
                     'from'    => $contacte->getMail(),
                     'sujet'   => $mail->getSubject(),
                     'message' => $contacte->getMessage(),
                     'created' => $contacte->getDate(),
-                )));*/
-                //$this->get('mailer')->send($mail);
+                )));
+                $this->get('mailer')->send($mail);
             }
         }
 

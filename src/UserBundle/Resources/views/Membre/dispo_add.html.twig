@@ -49,12 +49,12 @@
                     <div class="form-group col-sm-6">
                         {{ form_errors(form.dispoDebut) }}
                         {{ form_label(form.dispoDebut, 'Disponible du :') }}
-                        {{ form_widget(form.dispoDebut) }}
+                        {{ form_widget(form.dispoDebut, {'attr': {'class': 'form-control datepikerD'}}) }}
                     </div>
                     <div class="form-group col-sm-6">
                         {{ form_errors(form.dispoFin) }}
                         {{ form_label(form.dispoFin, 'Aux :') }}
-                        {{ form_widget(form.dispoFin) }}
+                        {{ form_widget(form.dispoFin, {'attr': {'class': 'form-control datepikerF'}}) }}
                     </div>
                     <div class="form-group col-sm-12">
                         <input type="hidden" name="_csrf_token"

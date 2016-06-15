@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
-<head lang="fr">
-    <meta charset="UTF-8">
-</head>
+    <head lang="fr">
+        <meta charset="UTF-8">
+    </head>
 <body>
     <header>
         <p>
@@ -21,10 +21,12 @@
             <strong>Sujet: </strong><em>{{ sujet }}</em><br/>
             Chère Administrateur, un visiteur vous a laisser un message sur le site.
             <br/>
-            Ci-joint, une copie: <br/>
-            <blockquote>
-                {{ message }}
-            </blockquote>
+            Ci-joint, une copie:
+        </p>
+        <blockquote>
+            {{ message }}
+        </blockquote>
+        <p>
             Vous pouvez aussi le consulter dans l'espace d'administration <a href="#">ICI (non affectee)</a>.
         </p>
     </section>

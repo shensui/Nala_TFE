@@ -13,6 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Range;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
@@ -48,8 +49,8 @@ class DispoSearchType extends AbstractType
                                                     'multiple' =>false,
                                                     'attr'     => array('class'    => 'form-control input-lg'),
             ))
-            ->add('min_date',  TextType::class, ['attr' => ['class' => 'form-control datepikerD']])
-            ->add('max_date',  TextType::class, ['attr' => ['class' => 'form-control datepikerF']])
+            ->add('min_date',  DateType::class,['widget' => 'single_text','input'  => 'datetime','format' => 'yyyy-MM-dd'])
+            ->add('max_date',  DateType::class,['widget' => 'single_text','input'  => 'datetime','format' => 'yyyy-MM-dd'])
             ->add('trouver', 'submit', array('attr' => array('class' => 'btn btn-validate')))
         ;
     }

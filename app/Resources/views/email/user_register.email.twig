@@ -1,0 +1,44 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block subject %}
+    {% autoescape false %}
+        {{ 'registration.email.subject'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}) }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_text %}
+    {% autoescape false %}
+        {{ 'registration.email.message'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}) }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+    <!DOCTYPE html>
+    <html>
+    <head lang="fr">
+        <meta charset="UTF-8">
+    </head>
+    <body>
+    <div style="background-color: #1b6d85; padding: 2px 5px;">
+        <h3>Bonjour {{ user.username|trans() }}</h3>
+        <p style="background-color: rgba(255,255,255,0.2); padding: 10px 10px;">
+            Nous vous remercions de vous ètes inscrit sur notre site, vous aller pouvoir profiter des toutes ces fonctinnnalitées.
+            <br>
+            Pour cela il vous sufit de valider votre compte utilisateur.
+            <br>
+            merci de cliquer sur <a style="text-decoration: underline; color: darkred"
+                                    href="{{ confirmationUrl }}">ce lien</a> pour valider votre incription.
+            <br><br>
+            Cordialement, L'équipe du site.
+        </p>
+        <hr/>
+        <p>
+            <em>Ce mail à été envoyer via un formulaire symfony en mode local.</em>
+        </p>
+    </div>
+
+    <footer>
+    </footer>
+    </body>
+    </html>
+{% endblock %}
