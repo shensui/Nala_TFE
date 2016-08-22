@@ -7,9 +7,6 @@ admin_general:
     resource: "route/general.yml"
     prefix:   /
 
-admin_manga:
-    resource: "route/manga.yml"
-    prefix:   /manga
 
 admin_membre:
     resource: "route/membre.yml"

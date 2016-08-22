@@ -1,13 +1,3 @@
-#route genre
-admin_genre:
-    path:     /genre
-    defaults: { _controller: AdminBundle:Admin:Genre }
-
-#route type
-admin_type:
-    path:     /type
-    defaults: { _controller: AdminBundle:Admin:Type }
-
 #route contacte
 admin_contact:
     path:     /contact

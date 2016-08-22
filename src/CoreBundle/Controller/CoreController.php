@@ -39,13 +39,9 @@ class CoreController extends Controller{
         $form = $this->createForm(new DispoSearchType());
         $userVille = $em->getRepository('UserBundle:User')->userVille();
 
-        $typeAnimal = array("chien", "chat", "lezard",
-                            "poisson", "chevre", "etx");
-        dump($typeAnimal, $userVille);
-
         if($request->getMethod() == 'POST')
         {
-            dump($_POST);
+            /*dump($_POST);*/
             $form->submit($request);
             //On vérifie que les valeurs entrées sont correctes
             if($form->isValid())
@@ -53,27 +49,28 @@ class CoreController extends Controller{
                 $em = $this->getDoctrine()->getManager();
                 //On récupère les données entrées dans le formulaire par l'utilisateur
                 $data = $request->get('UserBundle_Dispo_Search');
-                dump($data);
+//                dump($data);
                 //On va récupérer la méthode dans le repository afin de trouver toutes les annonces filtrées par les paramètres du formulaire
                 $liste_dispo = $em->getRepository('UserBundle:Dispo')->isDispo($data);
-                //$request->getSession()->getFlashBag()->add('success', 'Votre recherche a retournee: '.count($liste_manga).'.');
-                //Puis on redirige vers la page de visualisation de cette liste d'annonces
-
-                return $this->render('CoreBundle:Core:Annonce.html.twig', array(
-                    'dispo'  => $liste_dispo,
-                    'nbrRes' => count($liste_dispo)
-                ));
+                $search = ['list' => $liste_dispo, 'nbr' => count($liste_dispo)];
+                dump($liste_dispo, $_SESSION);
+                $session = $request->getSession();
+                $session->set('result',$search);
+                $ne = $session->get('result');
+                dump($session, $ne);
+                return $this->redirect($this->generateUrl('core_annonce'));
             }
         }
 
         return $this->render('CoreBundle:Core:index.html.twig', array(
-            'animal'  => $typeAnimal,
             'ville'   => $userVille,
             'form'    => $form->createView()
         ));
     }
 
-    public function aboutAction(){}
+    public function aboutAction(){
+        return $this->render('CoreBundle:Core:About.html.twig');
+    }
 
     /**
      * @param Request $request
@@ -82,6 +79,7 @@ class CoreController extends Controller{
     public function contacteAction(Request $request){
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
+
         $contacte = new Contacte();
         $contacte->setDestinataire('admin');
 
@@ -95,6 +93,10 @@ class CoreController extends Controller{
             'adr_email_2'   => 'darknarke@gmail.com',
             'gsm_num'       => '0472/80.37.75'
         );
+
+        $form = $this->createForm(new ContacteType(), $contacte);
+        $mail = null;
+
         if($user){
             /*
              * si le visiteur est un membre enregistré,
@@ -103,29 +105,24 @@ class CoreController extends Controller{
             $contacte->setAuteur($user->getUsername());
             $contacte->setMail($user->getEmail());
         }
-        else{
-            $message = "je n'existe pas domage!!!";
-        }
-        dump($contacte, $user, $adress);
 
-        $form = $this->createForm(new ContacteType(), $contacte);
-        $mail = null;
+        dump($contacte, $user, $adress);
 
         if ($request->getMethod() == 'POST') {
             $form->submit($request);
             if ($form->isValid()) {
-
                 $em->persist($contacte);
                 $em->flush();
+
                 $request->getSession()->getFlashBag()->add('notice', 'Votre message a bien ete envoyer');
-                //$request->getSession()->getFlashBag()->clear();
 
                 $From = array($contacte->getMail() => $contacte->getAuteur());
+                $To   = array('admin@shensuiprod.esy.es' => 'Administrateur');
 
                 $mail = \Swift_Message::newInstance();
                 $mail->setSubject('Formulaire de Contacte_'.$contacte->getDate()->format('d_m_y'));
                 $mail->setFrom($From);
-                $mail->setTo('admin@shensuiprod.esy.es'); //remplacer par le compte mail du serveur
+                $mail->setTo($To); //remplacer par le compte mail du serveur
                 $mail->setCharset('utf-8');
                 $mail->setContentType('text/html');
                 $mail->setBody($this->renderView('CoreBundle:mail:Contacte_Mail.html.twig', array(
@@ -165,11 +162,16 @@ class CoreController extends Controller{
         ));
     }
 
-    /**
-     *
-     */
-    public function AnnonceAction(){
-        return $this->render('CoreBundle:Core:Annonce.html.twig');
+
+    public function AnnonceAction(Request $request){
+        $session = $request->getSession()->get('result');
+        $dispos = $session['list'];
+        $nbr = $session['nbr'];
+        dump($dispos, $nbr);
+        return $this->render('CoreBundle:Core:Annonce.html.twig', array(
+            'nbrRes' => $nbr,
+            'dispo' => $dispos
+        ));
     }
 
     /**

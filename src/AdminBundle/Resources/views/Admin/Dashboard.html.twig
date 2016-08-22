@@ -10,10 +10,10 @@
                 <a href="javascript:;" data-toggle="collapse" data-target="#fiche"><i class="fa fa-fw fa-book"></i> Manga <i class="fa fa-fw fa-caret-down"></i></a>
                 <ul id="fiche" class="collapse">
                     <li>
-                        <a href="{{ path('admin_liste') }}">Liste</a>
+                        <a href="#">Liste</a>
                     </li>
-                    <li><a href="{{ path('admin_type') }}">Type</a></li>
-                    <li><a href="{{ path('admin_genre') }}">Genre</a></li>
+                    <li><a href="#">Type</a></li>
+                    <li><a href="#">Genre</a></li>
                 </ul>
             </li>
             <li>
@@ -29,7 +29,7 @@
             </li>
             {% endif %}
             <li class="">
-                <a href="{{ path('manga_homepage') }}"><i class=""></i> Retours au Site</a>
+                <a href="#"><i class=""></i> Retours au Site</a>
             </li>
         </ul>
     </div>
@@ -70,12 +70,12 @@
                             <i class="fa fa-book fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">{{ manga }}</div>
+                            <div class="huge">manga</div>
                             <div>Manga(s) !</div>
                         </div>
                     </div>
                 </div>
-                <a href="{{ path('admin_liste', {'page': 1}) }}">
+                <a href="#">
                     <div class="panel-footer">
                         <span class="pull-left">View Details</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -92,7 +92,7 @@
                             <i class="fa fa-comments fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">{{ comment }}</div>
+                            <div class="huge">cc</div>
                             <div>Comments!</div>
                         </div>
                     </div>
@@ -144,11 +144,7 @@
                         </div>
                         <div class="panel-body" style="padding: 0;">
                             <ul class="list-group list-inline row" style="margin: 0; text-align: center; padding: 0 5px;">
-                                {% for key, genre in statGenre %}
-                                    <li class="list-group-item col-lg-4 col-sm-12 col-xs-12" style="">
-                                        <a href="#">{{ key }}</a> <span style="margin-left: 5px;" class="badge">{{ genre }}</span>
-                                    </li>
-                                {% endfor %}
+
                             </ul>
                         </div>
                     </div>
@@ -159,11 +155,7 @@
                         </div>
                         <div class="panel-body" style="padding: 0;">
                             <ul class="list-group" style="margin: 0;">
-                                {% for key, type in statType %}
-                                    <li class="list-group-item">
-                                        <a href="#">{{ key }}</a> <span class="badge">{{ type }}</span>
-                                    </li>
-                                {% endfor %}
+
                             </ul>
                         </div>
                     </div>
@@ -174,44 +166,7 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-12 col-sm-12">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    Média(s)
-                </div>
-                <div class="panel-body">
-                    <div class="panel panel-green  col-lg-6 col-sm-12" style="padding: 0;">
-                        <div class="panel-heading">
-                            Derniere music ajouter
-                        </div>
-                        <div class="panel-body">
-                            <ul class="list-unstyled" style="margin: 0;">
-                                <li>
-                                    <audio controls="controls" src="{{ asset('media/song/AiKotoba.mp3') }}" style="width: 100%;"></audio>
-                                </li>
-                                <li>
-                                    <audio controls="controls" src="{{ asset('media/song/Forget_me_not.mp3') }}" style="width: 100%;"></audio>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="panel panel-green  col-lg-6 col-sm-12" style="padding: 0;">
-                        <div class="panel-heading">
-                            Derniere video ajouter
-                        </div>
-                        <div class="panel-body row">
-                            {% for video in video %}
-                            <div class="col-lg-6 col-sm-6">
-                                <iframe src="https://www.youtube.com/embed/{{ video.src }}" frameborder="0" style="width: 100%;" allowfullscreen></iframe>
-                            </div>
-                            {% endfor %}
-                            {{ dump(video) }}
-                        </div>
-                    </div>
-            </div>
-
-        </div>
+        
     </div>
 {% endblock %}
 

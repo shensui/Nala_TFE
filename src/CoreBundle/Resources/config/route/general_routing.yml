@@ -4,10 +4,9 @@ core_homepage:
     path:     /
     defaults: { _controller: CoreBundle:Core:index }
 
-
 #route de la page a propos
 core_about:
-    path:     /
+    path:     /about
     defaults: { _controller: CoreBundle:Core:about }
 
 
@@ -31,8 +30,9 @@ core_annonce:
 
 #route du profil public d'un membre
 Core_Profil:
-   path: /profile/{id}_{username}
-   defaults: { _controller: CoreBundle:Core:ProfilePub }
+    path: /profile/{id}_{username}
+    defaults: { _controller: CoreBundle:Core:ProfilePub }
+
 
 #route teste
 Core_test:
