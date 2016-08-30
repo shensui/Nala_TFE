@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="fr">
+    <meta charset="UTF-8">
+    <style>
+        a{text-decoration: none; color: #00b3ee;}
+        .intro{padding: 5px 10px; color: black; text-align: justify;}
+        .message{border: 1px dashed rgba(0,0,0,0.5); padding: 5px;}
+        body{background: silver;}
+    </style>
+</head>
+    <body>
+        <section>
+            <p class="intro">
+                Bonjour {{ destinatair }}, Vous recevez ce mail car une personne, a consulté,
+                votre profil et souhaite vous contacter pour de plus ample information.
+                <br>
+                Vous trouverez ci-dessous un copie du message, que vous pouvez consulter, <a href="{{ path('fos_user_profile_show') }}">dans voutre profil</a>.
+            </p>
+            <p class="message">
+                auteur: {{ auteur }}
+                <br><br>
+                le message: {{ message }}
+                <br><br>
+                reçu: le {{ created|date("d.m.Y") }}
+            </p>
+        </section>
+        <footer>
+            <hr/>
+            <em>Ce mail à été envoyer via un formulaire symfony en mode local.</em>
+        </footer>
+    </body>
+</html>

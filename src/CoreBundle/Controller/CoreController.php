@@ -11,14 +11,16 @@ namespace CoreBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /*Entity*/
 use CoreBundle\Entity\Contacte;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use UserBundle\Entity\Animals;
 use UserBundle\Entity\Dispo;
 use UserBundle\Entity\Message;
 use UserBundle\Entity\User;
+
 /*form*/
 use CoreBundle\Form\ContacteType;
 use UserBundle\Form\DispoSearchType;
@@ -52,13 +54,16 @@ class CoreController extends Controller{
 //                dump($data);
                 //On va récupérer la méthode dans le repository afin de trouver toutes les annonces filtrées par les paramètres du formulaire
                 $liste_dispo = $em->getRepository('UserBundle:Dispo')->isDispo($data);
-                $search = ['list' => $liste_dispo, 'nbr' => count($liste_dispo)];
-                dump($liste_dispo, $_SESSION);
+                return $this->render("CoreBundle:Core:Annonce.html.twig", array(
+                    'nbrRes' => count($liste_dispo),
+                    'dispo' => $liste_dispo
+                ));
+/*                $search = ['list' => $liste_dispo, 'nbr' => count($liste_dispo)];
                 $session = $request->getSession();
                 $session->set('result',$search);
                 $ne = $session->get('result');
-                dump($session, $ne);
-                return $this->redirect($this->generateUrl('core_annonce'));
+                dump($ne, $session);
+                return $this->redirect($this->generateUrl('core_annonce'));*/
             }
         }
 
@@ -167,7 +172,8 @@ class CoreController extends Controller{
         $session = $request->getSession()->get('result');
         $dispos = $session['list'];
         $nbr = $session['nbr'];
-        dump($dispos, $nbr);
+        dump($session);
+        //dump($dispos, $nbr);
         return $this->render('CoreBundle:Core:Annonce.html.twig', array(
             'nbrRes' => $nbr,
             'dispo' => $dispos
@@ -209,6 +215,24 @@ class CoreController extends Controller{
             if ($form->isValid()) {
                 $em->persist($message);
                 $em->flush();
+
+                $From = array('herbale2@hotmail.com');
+                $To   = array($user->getEmail() => $user->getUsername());
+
+                $mail = \Swift_Message::newInstance();
+                $mail->setSubject('Notification de nouveaux message');
+                $mail->setFrom($From);
+                $mail->setTo($To); //remplacer par le compte mail du serveur
+                $mail->setCharset('utf-8');
+                $mail->setContentType('text/html');
+                $mail->setBody($this->renderView('CoreBundle:mail:Contacte_Profil.html.twig', array(
+                    'destinatair' => $user->getPrenom().' '.$user->getNom(),
+                    'auteur'      => $message->getAuteur(),
+                    'message'     => $message->getMessage(),
+                    'created'     => $message->getCreated()
+                )));
+                $this->get('mailer')->send($mail);
+
                 $this->redirect($this->generateUrl('Core_Profil', array('id'=> $user->getId(), 'username' => $user->getUsername())));
             }
         }

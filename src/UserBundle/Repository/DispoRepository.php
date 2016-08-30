@@ -18,7 +18,9 @@ class DispoRepository extends \Doctrine\ORM\EntityRepository
         $query = $this->createQueryBuilder('d');
         $query->where('d.animal = :type')
               ->andWhere('d.dispoDebut <= :min_date')
-              ->andWhere('d.dispoFin <= :max_date');
+              ->andWhere('d.dispoFin >= :max_date');
+        $query->join("d.membre", "m")
+              ->addSelect('m');
         /*$query->Join('d.membre', 'm')
               ->addSelect('m')
               ->where('m.adr_ville = :ville')

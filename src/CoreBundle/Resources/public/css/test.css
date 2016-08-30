@@ -167,6 +167,9 @@
     background: darksalmon;
 }
 
+.table-dispo tr:hover {background-color: #5e5e5e}
+.table-dispo tr:nth-child(even) {background-color: #ffe9d2}
+
 .box-user{
     //height: 100px;
     background: lightblue;
