@@ -148,25 +148,6 @@ class CoreController extends Controller{
         ));
     }
 
-    /**
-     * @param $ville
-     * @return JsonResponse
-     * @throws \Exception
-     */
-    public function AjaxVilleAction($ville){
-        $em = $this->getDoctrine()->getManager();
-        $response = new JsonResponse();
-        $villes = null;
-        /*
-         * ajouter les/la fonction pour recupérer les villes
-         * via le code postale.
-         */
-
-        return $response->setData(array(
-            'villes' => $villes
-        ));
-    }
-
 
     public function AnnonceAction(Request $request){
         $session = $request->getSession()->get('result');
@@ -207,9 +188,9 @@ class CoreController extends Controller{
         $message->setDestinatair($user);
         $form = $this->createForm(new MessageType(), $message);
         $mail = null;
-        dump($message);
-        dump($user);
-        dump($visitor);
+        //dump($message);
+        //dump($user);
+        //dump($visitor);
         if ($request->getMethod() == 'POST') {
             $form->submit($request);
             if ($form->isValid()) {
@@ -242,7 +223,8 @@ class CoreController extends Controller{
             'user'   => $user,
             'form'   => $form->createView(),
             'dispo'  => $listDispo,
-            'animal' => $listAnimal
+            'animal' => $listAnimal,
+            'nbr'    => count($listAnimal)
         ));
     }
 

@@ -6,3 +6,6 @@ membre_dispo:
     path:     /profil/dispo/add
     defaults: { _controller: UserBundle:Profile:dispo_add}
 
+membre_animal:
+    path:     /profil/animal/add
+    defaults: { _controller: UserBundle:Profile:animal_add}

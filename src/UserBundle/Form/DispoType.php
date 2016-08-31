@@ -5,6 +5,7 @@ namespace UserBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,7 +20,7 @@ class DispoType extends AbstractType
         $builder
             ->add('dispoDebut', DateType::class, ['widget' => 'single_text','input'  => 'datetime','format' => 'yyyy-MM-dd'])
             ->add('dispoFin', DateType::class, ['widget' => 'single_text','input'  => 'datetime','format' => 'yyyy-MM-dd'])
-            ->add('animal', TextType::class, ['attr' => ['class' => 'form-control']])
+            ->add('animal', ChoiceType::class,['choices'  =>['Chat' => 'Chat', 'Chien' => 'Chien', 'Poisson' => 'Poisson']])
             ->add('ajouter', 'submit', array('attr'=> array('class' => 'btn btn-primary')))
         ;
     }

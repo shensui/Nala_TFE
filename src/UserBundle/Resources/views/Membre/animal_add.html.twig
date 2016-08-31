@@ -1,7 +1,6 @@
 {% extends "UserBundle::UserLayout.html.twig" %}
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('bundles/core/css/jquery.datetimepicker.css') }}">
     <style>
 
     </style>
@@ -34,33 +33,49 @@
         {{ dump() }}
         <div class="col-lg-12">
             <div class="well">
-                <h2>Ajoux d'un disponibilitée.</h2>
+                <h2>Ajoux d'un Animal.</h2>
 
+                {#{{ form_start(form) }}
+                {{ form_widget(form) }}
+                {{ form_end(form) }}#}
                 {{ form_start(form) }}
                 {{ form_errors(form) }}
                 <div class="row">
                     <div class="form-goup col-sm-12">
-                        {{ form_errors(form.animal) }}
-                        {{ form_label(form.animal, 'Le type d\'animal') }}
-                        {{ form_widget(form.animal, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.name) }}
+                        {{ form_label(form.name, 'Nom de l\'animal') }}
+                        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
                     </div>
                 </div>
                 <br>
                 <div class="row">
-                    <div class="form-group col-sm-6">
-                        {{ form_errors(form.dispoDebut) }}
-                        {{ form_label(form.dispoDebut, 'Disponible du :') }}
-                        {{ form_widget(form.dispoDebut, {'attr': {'class': 'form-control datepikerD'}}) }}
+                    <div class="form-group col-sm-4">
+                        {{ form_errors(form.type) }}
+                        {{ form_label(form.type, 'Type d\'animal:') }}
+                        {{ form_widget(form.type, {'attr': {'class': 'form-control datepikerD'}}) }}
                     </div>
-                    <div class="form-group col-sm-6">
-                        {{ form_errors(form.dispoFin) }}
-                        {{ form_label(form.dispoFin, 'Aux :') }}
-                        {{ form_widget(form.dispoFin, {'attr': {'class': 'form-control datepikerF'}}) }}
+                    <div class="form-group col-sm-4">
+                        {{ form_errors(form.sexe) }}
+                        {{ form_label(form.sexe, 'Sexe:') }}
+                        {{ form_widget(form.sexe, {'attr': {'class': 'form-control datepikerF'}}) }}
+                    </div>
+                    <div class="form-group col-sm-4">
+                        {{ form_errors(form.age) }}
+                        {{ form_label(form.age, 'Age:') }}
+                        {{ form_widget(form.age, {'attr': {'class': 'form-control datepikerF'}}) }}
                     </div>
                     <div class="form-group col-sm-12">
                         <input type="hidden" name="_csrf_token"
                                value="{{ csrf_token('authenticate') }}"
                         >
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="form-goup col-sm-12">
+                        {{ form_errors(form.santee) }}
+                        {{ form_label(form.santee, 'Etats de santée') }}
+                        {{ form_widget(form.santee, {'attr': {'class': 'form-control'}}) }}
                     </div>
                 </div>
                 <br>
@@ -75,22 +90,3 @@
         </div>
     </div>
 {% endblock fos_user_content %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('bundles/core/js/jquery.datetimepicker.full.js') }}" type="text/javascript"></script>
-    <script>
-        $(document).ready(function(){
-            $('.datepikerD').datetimepicker({
-                timepicker:false,
-                mask:true,
-                format:'Y-m-d'
-            });
-            $('.datepikerF').datetimepicker({
-                timepicker:false,
-                format:'Y-m-d',
-                mask:true
-            });
-        });
-    </script>
-{% endblock %}

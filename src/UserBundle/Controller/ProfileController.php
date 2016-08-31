@@ -84,11 +84,32 @@ class ProfileController extends BaseProfil
             if ($form->isValid()) {
                 $em->persist($dispo);
                 $em->flush();
-                dump($dispo);
                 $this->redirect($this->generateUrl('fos_user_profile_show'));
             }
         }
         return $this->render('UserBundle:Membre:dispo_add.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
+
+    public function animal_AddAction(Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $animal = new Animals();
+        $animal->setPropietaire($user);
+        $form  = $this->createForm(new AnimalsType(), $animal);
+
+        if ($request->getMethod() == 'POST') {
+            $form->submit($request);
+            if ($form->isValid()) {
+                $em->persist($animal);
+                $em->flush();
+                /*la redirection ne fonctionne pas...*/
+                $this->redirect($this->generateUrl('fos_user_profile_show'));
+            }
+        }
+
+        return $this->render('UserBundle:Membre:animal_add.html.twig', array(
             'form' => $form->createView()
         ));
     }

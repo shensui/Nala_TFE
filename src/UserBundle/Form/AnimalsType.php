@@ -5,6 +5,8 @@ namespace UserBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 
 class AnimalsType extends AbstractType
 {
@@ -16,11 +18,11 @@ class AnimalsType extends AbstractType
     {
         $builder
             ->add('name', 'text')
-            ->add('type', 'text')
-            ->add('sexe')
+            ->add('type', ChoiceType::class,['choices'  =>['Chat' => 'Chat', 'Chien' => 'Chien', 'Poisson' => 'Poisson']])
+            ->add('sexe', ChoiceType::class,['choices'  =>['0' => 'Femelle', '1' => 'Male'], 'expanded'=>false, 'multiple'=> false])
             ->add('age','text')
             ->add('santee', 'textarea')
-            ->add('Ajoutet', 'submit', array('attr' => array('class' => 'btn btn-primary')))
+            ->add('ajouter', 'submit', array('attr' => array('class' => 'btn btn-primary')))
         ;
     }
     
