@@ -48,6 +48,15 @@
                 format:'d.m.Y',
                 mask:true
             });
+            Ajax_message();
         });
+
+        function Ajax_message(){
+            debug('je suis pret a travailler ^^');
+            $('.message-teste ').click(function(){
+                var hiden = $('.hiden').val();
+                debug(hiden);
+            });
+        }
     </script>
 {% endblock %}

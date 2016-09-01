@@ -15,6 +15,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\UserBundle\Controller\ProfileController as BaseProfil;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 use UserBundle\Entity\Animals;
 use UserBundle\Entity\Dispo;
 use UserBundle\Entity\User;
@@ -46,28 +48,24 @@ class ProfileController extends BaseProfil
     {
         $em   = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $animal = new Animals();
+        //$animal = new Animals();
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
         /*ajout des donnée dans le profil*/
-        $listDispo  = $em->getRepository('UserBundle:Dispo')->findByMembre($user);
-        $listAnimal = $em->getRepository('UserBundle:Animals')->findByPropietaire($user);
-        $message = $em->getRepository('UserBundle:Message')->isLut('0',$user);
-        $animal->setPropietaire($user);
-
-        /*formulaire d'ajoute de disponibilitée et d'annimeaux*/
-
-        $form2 = $this->createForm(new AnimalsType(), $animal);
-
+        $listDispo   = $em->getRepository('UserBundle:Dispo')->findByMembre($user);
+        $listAnimal  = $em->getRepository('UserBundle:Animals')->findByPropietaire($user);
+        //$message     = $em->getRepository('UserBundle:Message')->isLut('0',$user);
+        $message     = $em->getRepository('UserBundle:Message')->findBy(['destinatair' => $user],['lut' => 'ASC']);
+        $count       = $em->getRepository('UserBundle:Message')->isLut('0',$user);
+        dump($message, $count);
         return $this->render('FOSUserBundle:Profile:show.html.twig', array(
-            'user'     => $user,
-            'dispo'    => $listDispo,
-            'animal'   => $listAnimal,
-            'formA'    => $form2->createView(),
-            'nbr'      => count($message),
-            'messages' => $message
+            'user'        => $user,
+            'dispo'       => $listDispo,
+            'animal'      => $listAnimal,
+            'nbr'         => count($count),
+            'messages'    => $message,
         ));
     }
 
@@ -125,5 +123,15 @@ class ProfileController extends BaseProfil
             $em->flush();
             //dump($user);
         }
+    }
+
+    public function ajax_messageAction(Message $message){
+        $em = $this->getDoctrine()->getManager();
+        $response = new JsonResponse();
+
+
+        return $response->setData(array(
+            'pays' => $p
+        ));
     }
 }

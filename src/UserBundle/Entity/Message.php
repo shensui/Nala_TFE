@@ -65,7 +65,7 @@ class Message
     private $deleteAt;
 
     public function __construct(){
-        $this->lut = '0'; // 0 par default
+        $this->lut = '0'; // 0 non-lu / 1 lut
     }
 
     /**

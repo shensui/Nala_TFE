@@ -175,26 +175,33 @@
                         <div class="col-md-12 table-responsive">
                             <table class="table" class="table-hover">
                                 {% for message in messages %}
-                                <tr data-toggle="collapse" data-target="#accordion{{ loop.index }}">
-                                    <td>{{ loop.index }}</td>
-                                    <td>{{ message.auteur }}</td>
-                                    <td>{{ message.created|date('d/m/Y H:i:s') }}</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">
-                                        <div id="accordion{{ loop.index }}" class="collapse">
-                                            <ul class="list-unstyled">
-                                                <li><strong>id: </strong>{{ message.id }}</li>
-                                                <li><strong>Auteur: </strong> {{ message.auteur }}</li>
-                                                <li><strong>Reçu le: </strong>{{ message.created|date('d/m/Y H:i:s') }}</li>
-                                                <li style="text-align: center;">
-                                                    <br>
-                                                    {{ message.message }}
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
+                                    <tr data-toggle="collapse" class="message-teste {% if message.lut == 0 %}tr-contact-0{% endif %}" data-target="#accordion{{ loop.index }}">
+                                        <td>{{ loop.index }} / {{ message.id }}</td>
+                                        <td class="hiden">{{ message.auteur }}</td>
+                                        <td>{{ message.created|date('d/m/Y H:i:s') }}</td>
+                                        <td>
+                                            {% if message.lut == 0 %}
+                                            non lut
+                                            {% else %}
+                                            lut
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">
+                                            <div id="accordion{{ loop.index }}" class="collapse">
+                                                <ul class="list-unstyled">
+                                                    <li><strong>id: </strong>{{ message.id }}</li>
+                                                    <li><strong>Auteur: </strong> {{ message.auteur }}</li>
+                                                    <li><strong>Reçu le: </strong>{{ message.created|date('d/m/Y H:i:s') }}</li>
+                                                    <li style="text-align: center;">
+                                                        <br>
+                                                        {{ message.message }}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
                                 {% endfor %}
                             </table>
                         </div>
