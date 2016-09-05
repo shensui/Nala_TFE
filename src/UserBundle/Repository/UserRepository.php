@@ -18,4 +18,12 @@ class UserRepository extends EntityRepository
 
         return $query->getQuery()->getArrayResult();
     }
+
+    public function by_roles($roles){
+        $query = $this->createQueryBuilder('u');
+        $query->where('u.roles LIKE :role');
+        $query->setParameter('role', "%ROLE_".$roles."%");
+
+        return $query->getQuery()->getArrayResult();
+    }
 }

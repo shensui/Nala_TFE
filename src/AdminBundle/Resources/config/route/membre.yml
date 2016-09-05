@@ -1,7 +1,11 @@
 #route membre
-admin_membre:
-    path:     /{page}
-    defaults: { _controller: AdminBundle:Admin:Membre, page: 1 }
+membre_liste:
+    path:     /liste
+    defaults: { _controller: AdminBundle:Membre:membre_list }
+
+membre_profil:
+    path:     /profil/{id}_{username}
+    defaults: { _controller: AdminBundle:Membre:membre_profil }
 
 so_admin_update_membre:
     path:     /$update/{id}_{username}

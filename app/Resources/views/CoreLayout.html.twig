@@ -33,9 +33,14 @@
                             </a>
                         </div>
                         <div class="user">
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                <a href="{{ path('fos_user_security_logout') }}" class="bttn btn-connect">Logout</a>
+
+                            {% else %}
                             <a href="{{ path('fos_user_security_login') }}" class="bttn btn-connect">Connection</a>
 
                             <a href="{{ path('fos_user_registration_register') }}" class="bttn btn-register">Inscription</a>
+                            {% endif %}
                         </div>
                         <ul class="list-unstyled list-inline">
                             {% block site_nav %}

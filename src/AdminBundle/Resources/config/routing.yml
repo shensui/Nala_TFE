@@ -12,6 +12,6 @@ admin_membre:
     resource: "route/membre.yml"
     prefix:   /membre
 
-admin_membre:
-    resource: "route/pdf.yml"
-    prefix:   /pdf
+#admin_pdf:
+#    resource: "route/pdf.yml"
+#    prefix:   /pdf

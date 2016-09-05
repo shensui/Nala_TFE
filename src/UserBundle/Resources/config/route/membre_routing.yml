@@ -9,3 +9,9 @@ membre_dispo:
 membre_animal:
     path:     /profil/animal/add
     defaults: { _controller: UserBundle:Profile:animal_add}
+
+membre_message_lut:
+    path:     /profil/message/{lut}
+    defaults: { _controller: UserBundle:Profile:animal_add }
+    options:
+        expose: true

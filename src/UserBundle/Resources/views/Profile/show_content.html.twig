@@ -173,9 +173,10 @@
                 <div class="tab-pane" id="contacte">
                     <div class="row">
                         <div class="col-md-12 table-responsive">
-                            <table class="table" class="table-hover">
+                            <table class="table" class="table-hover table-message">
                                 {% for message in messages %}
                                     <tr data-toggle="collapse" class="message-teste {% if message.lut == 0 %}tr-contact-0{% endif %}" data-target="#accordion{{ loop.index }}">
+                                        <td style="display: none;">{{ message.id }}</td>
                                         <td>{{ loop.index }} / {{ message.id }}</td>
                                         <td class="hiden">{{ message.auteur }}</td>
                                         <td>{{ message.created|date('d/m/Y H:i:s') }}</td>

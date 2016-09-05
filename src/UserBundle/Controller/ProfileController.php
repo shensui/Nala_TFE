@@ -125,13 +125,24 @@ class ProfileController extends BaseProfil
         }
     }
 
-    public function ajax_messageAction(Message $message){
+    public function ajax_messageAction($lut){
         $em = $this->getDoctrine()->getManager();
         $response = new JsonResponse();
 
+        $luts = $em->getRepository('UserBundle:Message')
+            ->findOneBy(array('id' => $lut));
+
+        if($luts && $luts->getLut == 0){
+            $luts->setLut('1');
+            $em->persist($luts);
+            $em->flush();
+            $rep = 'le message a ete lut';
+        }else{
+            $rep = 'il y a eu une erreurs';
+        }
 
         return $response->setData(array(
-            'pays' => $p
+            'rep' => $rep
         ));
     }
 }

@@ -1,0 +1,42 @@
+{# file redered in ::AdminLayout#}
+<ul class="dropdown-menu message-dropdown">
+    {% for contacte in contactes %}
+        <li class="message-preview">
+            <a href="#">
+                <div class="media">
+                <span class="pull-left">
+                    <img class="media-object" src="http://placehold.it/50x50" alt="">
+                </span>
+                    <div class="media-body">
+                        <h5 class="media-heading">
+                            <strong>{{ contacte.auteur }}</strong>
+                        </h5>
+                        <p class="small text-muted"><i class="fa fa-clock-o"></i> {{ contacte.date|date('d/m/Y') }}</p>
+                        <p>
+                            {{ contacte.message|truncate(50, true) }}
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </li>
+    {% endfor %}
+    <li class="message-preview">
+        <a href="#">
+            <div class="media">
+                <span class="pull-left">
+                    <img class="media-object" src="http://placehold.it/50x50" alt="">
+                </span>
+                <div class="media-body">
+                    <h5 class="media-heading">
+                        <strong>Admin 5842</strong>
+                    </h5>
+                    <p class="small text-muted"><i class="fa fa-clock-o"></i> 13/10/15</p>
+                    <p>Tester le template sur un serveur</p>
+                </div>
+            </div>
+        </a>
+    </li>
+    <li class="message-footer">
+        <a href="#">Read All New Messages</a>
+    </li>
+</ul>

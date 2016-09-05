@@ -11,4 +11,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class ContacteRepository extends EntityRepository
 {
+    public function New_Contacte(){
+        $query = $this->createQueryBuilder('c')
+            ->where('c.lut = 0')
+            ->orderBy('c.date', 'ASC')
+            ->setFirstResult(0)
+            ->setMaxResults(5);
+        return $query->getQuery()->getResult();
+    }
 }

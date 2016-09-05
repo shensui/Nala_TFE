@@ -50,6 +50,13 @@ class Contacte
     private $message;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="lut", type="string", length=1)
+     */
+    private $lut;
+
+    /**
      * @var datetime
      *
      * @ORM\Column(name="date", type="datetime")
@@ -60,6 +67,7 @@ class Contacte
     public function __construct()
     {
         $this->date = new \Datetime();
+        $this->lut  = '0'; /*non lut par défaut*/
     }
 
 
@@ -191,5 +199,29 @@ class Contacte
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * Set lut
+     *
+     * @param string $lut
+     *
+     * @return Contacte
+     */
+    public function setLut($lut)
+    {
+        $this->lut = $lut;
+
+        return $this;
+    }
+
+    /**
+     * Get lut
+     *
+     * @return string
+     */
+    public function getLut()
+    {
+        return $this->lut;
     }
 }

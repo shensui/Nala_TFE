@@ -36,6 +36,8 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('bundles/core/js/jquery.datetimepicker.full.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
     <script>
         $(document).ready(function(){
             $('.datepikerD').datetimepicker({
@@ -52,11 +54,25 @@
         });
 
         function Ajax_message(){
-            debug('je suis pret a travailler ^^');
-            $('.message-teste ').click(function(){
-                var hiden = $('.hiden').val();
-                debug(hiden);
+            debug('je suis de l\'ajax.');
+            $('.message-teste').click(function(){
+                var identifiant = $(this).find('td:first').html();
+                debug(identifiant);
+                $.ajax({
+                    type: 'get',
+                    url: Routing.generate('membre_message_lut',{ lut: identifiant}),
+                    //url: 'http://localhost/OtakuHeavenV2/web/app_dev.php/pays/'+$('.pays_type').val(),
+                    beforeSend: function(){
+                        console.log('ca charge');
+                    },
+                    success: function(data){
+                        console.log("j'ai trouvé ^^");
+                        console.log(data.rep);
+                        $(this).css("background", "none");
+                    }
+                });
             });
+
         }
     </script>
 {% endblock %}
