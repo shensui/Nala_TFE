@@ -18,7 +18,11 @@
                     <tr>
                         <td>Sexe: </td>
                         <td>
+                            {% if user.sexe == 1 %}
                             <i class="fa fa-mars" style="color: dodgerblue;"></i>
+                            {% else %}
+                            <i class="fa fa-venus" style="color: deeppink;"></i>
+                            {% endif %}
                         </td>
                     </tr>
                     <tr>

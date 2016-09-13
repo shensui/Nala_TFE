@@ -82,7 +82,7 @@ class ProfileController extends BaseProfil
             if ($form->isValid()) {
                 $em->persist($dispo);
                 $em->flush();
-                $this->redirect($this->generateUrl('fos_user_profile_show'));
+                return $this->redirect($this->generateUrl('fos_user_profile_show'));
             }
         }
         return $this->render('UserBundle:Membre:dispo_add.html.twig', array(
@@ -103,7 +103,7 @@ class ProfileController extends BaseProfil
                 $em->persist($animal);
                 $em->flush();
                 /*la redirection ne fonctionne pas...*/
-                $this->redirect($this->generateUrl('fos_user_profile_show'));
+                return $this->redirect($this->generateUrl('fos_user_profile_show'));
             }
         }
 

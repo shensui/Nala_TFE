@@ -31,6 +31,33 @@ class MembreController extends Controller
     public function membre_profilAction(User $user){
         $em = $this->getDoctrine()->getManager();
 
-        return $this->render();
+        $listDispo   = $em->getRepository('UserBundle:Dispo')->findByMembre($user);
+        $listAnimal  = $em->getRepository('UserBundle:Animals')->findByPropietaire($user);
+
+        return $this->render("AdminBundle:Membre:Profil_membre.html.twig", array(
+            'user'   => $user,
+            'dispo'  => $listDispo,
+            'animal' => $listAnimal
+        ));
+    }
+
+    public function promoteUserAction(User $user, $role){
+        $em     = $this->getDoctrine()->getManager();
+
+        if($user !== null){
+            $user_role = $user->getRoles();
+            $user->removeRole('ROLE_MODERATEUR');
+            $user->addRole($role);
+            dump($user_role);
+            dump($user);
+            dump($role);
+            $em->persist($user);
+            $em->flush();
+            //dump($user, $role);
+            return $this->redirect($this->generateUrl('membre_profil', array(
+                'id' => $user->getId(),
+                'username' => $user->getUsername()
+            )));
+        }
     }
 }

@@ -7,10 +7,6 @@ membre_profil:
     path:     /profil/{id}_{username}
     defaults: { _controller: AdminBundle:Membre:membre_profil }
 
-so_admin_update_membre:
-    path:     /$update/{id}_{username}
-    defaults: { _controller: SOAdminBundle:Admin:UpdateMembre }
-
-so_admin_promote:
-    path:     /update/{id}_{username}/{role}
-    defaults: { _controller: SOAdminBundle:Admin:Promote }
+membre_promote:
+    path:     /profil/{id}_{username}/{role}
+    defaults: { _controller: AdminBundle:Membre:promoteUser }
