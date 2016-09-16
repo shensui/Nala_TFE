@@ -11,6 +11,7 @@ namespace CoreBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -41,29 +42,24 @@ class CoreController extends Controller{
         $form = $this->createForm(new DispoSearchType());
         $userVille = $em->getRepository('UserBundle:User')->userVille();
 
-        if($request->getMethod() == 'POST')
+        if($request->getMethod() == 'GET')
         {
-            /*dump($_POST);*/
+            dump($request->getMethod());
             $form->submit($request);
             //On vérifie que les valeurs entrées sont correctes
-            if($form->isValid())
-            {
-                $em = $this->getDoctrine()->getManager();
-                //On récupère les données entrées dans le formulaire par l'utilisateur
-                $data = $request->get('UserBundle_Dispo_Search');
-//                dump($data);
-                //On va récupérer la méthode dans le repository afin de trouver toutes les annonces filtrées par les paramètres du formulaire
-                $liste_dispo = $em->getRepository('UserBundle:Dispo')->isDispo($data);
-                return $this->render("CoreBundle:Core:Annonce.html.twig", array(
-                    'nbrRes' => count($liste_dispo),
-                    'dispo' => $liste_dispo
-                ));
-/*                $search = ['list' => $liste_dispo, 'nbr' => count($liste_dispo)];
-                $session = $request->getSession();
-                $session->set('result',$search);
-                $ne = $session->get('result');
-                dump($ne, $session);
-                return $this->redirect($this->generateUrl('core_annonce'));*/
+            if($form->isValid()){
+                $data = $_GET;
+                dump($data);
+                $ville = $em->getRepository('UserBundle:User')->find($data['ville']);
+                $data['ville'] = $ville->getAdrVille();
+                dump($data);
+
+                return $this->redirect($this->generateUrl('Core_test', array(
+                    'type' => $data['type'],
+                    'min_date' => $data['min_date'],
+                    'max_date' => $data['max_date'],
+                    'ville' => $data['ville']
+                )));
             }
         }
 
@@ -150,15 +146,19 @@ class CoreController extends Controller{
 
 
     public function AnnonceAction(Request $request){
-        $session = $request->getSession()->get('result');
-        $dispos = $session['list'];
-        $nbr = $session['nbr'];
-        dump($session);
-        //dump($dispos, $nbr);
-        return $this->render('CoreBundle:Core:Annonce.html.twig', array(
-            'nbrRes' => $nbr,
-            'dispo' => $dispos
+        $em = $this->getDoctrine()->getManager();
+        $data = $_GET;
+        //On va récupérer la méthode dans le repository afin de trouver toutes les annonces filtrées par les paramètres du formulaire
+        $liste_dispo = $em->getRepository('UserBundle:Dispo')->isDispo($data);
+
+        dump($data);
+        dump($liste_dispo);
+
+        return $this->render("CoreBundle:Core:Annonce.html.twig", array(
+            'nbrRes' => count($liste_dispo),
+            'dispo' => $liste_dispo
         ));
+//        return new Response(dump($_GET));
     }
 
     /**

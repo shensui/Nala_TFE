@@ -74,6 +74,7 @@ class ProfileController extends BaseProfil
         $user = $this->getUser();
         $dispo = new Dispo();
         $dispo->setMembre($user);
+        $dispo->setVille($user->getAdrVille());
         $form  = $this->createForm(new DispoType(), $dispo);
 
         dump($request->getMethod());

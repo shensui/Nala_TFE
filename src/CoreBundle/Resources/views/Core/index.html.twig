@@ -50,9 +50,9 @@
                 Aliquid aspernatur at, distinctio dolorem ea ex impedit magnam molestiae neque, nihil nobis possimus quod rerum ut velit voluptate voluptatum? Earum, obcaecati.
             </p>
         </div>
-        <div class="row">
+        <div class="row"> {#'action': path('Core_test'),#}
             <div class="col-lg-6 col-lg-offset-3">
-                {{ form_start(form,{'attr': {'class': 'form-index'}}) }}
+                {{ form_start(form,{'method': 'GET' ,'attr': {'class': 'form-index'}}) }}
                 <h2>Rechercher une disponibilitée.</h2>
                 {{ form_errors(form) }}
 

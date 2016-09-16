@@ -47,6 +47,13 @@ class Dispo
     private $animal;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="ville", type="string", length=255)
+     */
+    private $ville;
+
+    /**
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
@@ -250,5 +257,29 @@ class Dispo
     public function getMembre()
     {
         return $this->membre;
+    }
+
+    /**
+     * Set ville
+     *
+     * @param string $ville
+     *
+     * @return Dispo
+     */
+    public function setVille($ville)
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    /**
+     * Get ville
+     *
+     * @return string
+     */
+    public function getVille()
+    {
+        return $this->ville;
     }
 }

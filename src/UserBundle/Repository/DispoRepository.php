@@ -18,17 +18,14 @@ class DispoRepository extends \Doctrine\ORM\EntityRepository
         $query = $this->createQueryBuilder('d');
         $query->where('d.animal = :type')
               ->andWhere('d.dispoDebut <= :min_date')
-              ->andWhere('d.dispoFin >= :max_date');
+              ->andWhere('d.dispoFin >= :max_date')
+              ->andWhere('d.ville = :ville');
         $query->join("d.membre", "m")
               ->addSelect('m');
-        /*$query->Join('d.membre', 'm')
-              ->addSelect('m')
-              ->where('m.adr_ville = :ville')
-              ->setParameter('ville',$data['ville']);*/
-
-        $query->setParameter('type',$data['type']);
+        $query->setParameter('type',    $data['type']);
         $query->setParameter('min_date',$data['min_date']);
         $query->setParameter('max_date',$data['max_date']);
+        $query->setParameter('ville',   $data['ville']);
         //$query->setParameters($parameter);
 
         return $query->getQuery()->getResult();

@@ -36,5 +36,5 @@ Core_Profil:
 
 #route teste
 Core_test:
-   path: /test
-   defaults: { _controller: CoreBundle:Core:test }
+   path: /search
+   defaults: { _controller: CoreBundle:Core:Annonce }
